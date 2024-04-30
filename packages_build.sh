@@ -13,13 +13,13 @@ export ROS_PACKAGE_PATH=${AMENT_PREFIX_PATH}
 # create the ROS_ROOT directory
 mkdir -p ${ROS_ROOT}/src
 cd ${ROS_ROOT}
-rosinstall_generator --deps --rosdistro ${ROS_DISTRO} $ROS_PACKAGE \
+rosinstall_generator --deps --rosdistro iron $ROS_PACKAGE \
     xacro\
     robot_localization\
     nmea_msgs\
-> ros2.${ROS_DISTRO}.$ROS_PACKAGE.rosinstall
-cat ros2.${ROS_DISTRO}.$ROS_PACKAGE.rosinstall
-vcs import src < ros2.${ROS_DISTRO}.$ROS_PACKAGE.rosinstall
+> ros2.iron.$ROS_PACKAGE.rosinstall
+cat ros2.iron.$ROS_PACKAGE.rosinstall
+vcs import src < ros2.iron.$ROS_PACKAGE.rosinstall
 
 SKIP_KEYS="libopencv-dev libopencv-contrib-dev libopencv-imgproc-dev python-opencv python3-opencv"
 
@@ -29,7 +29,7 @@ rosdep update
 rosdep install -y \
 	--ignore-src \
 	--from-paths src \
-	--rosdistro ${ROS_DISTRO} \
+	--rosdistro iron \
 	--skip-keys "$SKIP_KEYS"
 
 # build it all - for verbose, see https://answers.ros.org/question/363112/how-to-see-compiler-invocation-in-colcon-build
