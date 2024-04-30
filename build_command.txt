@@ -1,0 +1,5 @@
+ docker build --network=host --tag ros:iron-desktop-r35.4.1-zed \
+--file /home/jetson/ros-packages/Dockerfile \
+--build-arg BASE_IMAGE=zed:r35.4.1-zed \
+--build-arg ROS_VERSION="iron" \
+--build-arg ROS_PACKAGE="desktop" 
