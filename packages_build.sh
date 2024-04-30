@@ -1,25 +1,22 @@
 #!/usr/bin/env bash
 # this script builds a ROS2 packages from source
 
-
-echo "ROS2 builder => ROS_DISTRO=$ROS_DISTRO ROS_PACKAGE=$ROS_PACKAGE ROS_ROOT=$ROS_ROOT"
-
 set -e
 #set -x
 
 apt-get update
 
-export ROS_PACKAGE_PATH=${AMENT_PREFIX_PATH}
+export desktop_PATH=${AMENT_PREFIX_PATH}
 # create the ROS_ROOT directory
 mkdir -p ${ROS_ROOT}/src
 cd ${ROS_ROOT}
-rosinstall_generator --deps --rosdistro iron $ROS_PACKAGE \
+rosinstall_generator --deps --rosdistro iron $desktop \
     xacro\
     robot_localization\
     nmea_msgs\
-> ros2.iron.$ROS_PACKAGE.rosinstall
-cat ros2.iron.$ROS_PACKAGE.rosinstall
-vcs import src < ros2.iron.$ROS_PACKAGE.rosinstall
+> ros2.iron.$desktop.rosinstall
+cat ros2.iron.$desktop.rosinstall
+vcs import src < ros2.iron.$desktop.rosinstall
 
 SKIP_KEYS="libopencv-dev libopencv-contrib-dev libopencv-imgproc-dev python-opencv python3-opencv"
 

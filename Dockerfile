@@ -1,14 +1,10 @@
 #
 # Dockerfile for building ROS2 packages from source
 #
-ARG BASE_IMAGE = zed:r35.4.1-zed
-FROM ${BASE_IMAGE}
+FROM zed:r35.4.1-zed
 
-ARG ROS_PACKAGE=desktop
-ARG ROS_VERSION=iron
-
-ENV ROS_DISTRO=${ROS_VERSION}
-ENV ROS_ROOT=/opt/ros/${ROS_DISTRO}
+ENV ROS_DISTRO=iron
+ENV ROS_ROOT=/opt/ros/iron
 ENV ROS_PYTHON_VERSION=3
 
 ENV DEBIAN_FRONTEND=noninteractive
