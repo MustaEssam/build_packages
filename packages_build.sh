@@ -6,22 +6,20 @@ set -e
 
 apt-get update
 
-export desktop_PATH=${AMENT_PREFIX_PATH}
 # create the ROS_ROOT directory
 mkdir -p ${ROS_ROOT}/src
 cd ${ROS_ROOT}
-rosinstall_generator --deps --rosdistro iron $desktop \
+rosinstall_generator --deps --rosdistro iron \
     xacro\
     robot_localization\
     nmea_msgs\
-> ros2.iron.$desktop.rosinstall
-cat ros2.iron.$desktop.rosinstall
-vcs import src < ros2.iron.$desktop.rosinstall
+> ros2.iron.pkgs.rosinstall
+cat ros2.iron.pkgs.rosinstall
+vcs import src < ros2.iron.pkgs.rosinstall
 
 SKIP_KEYS="libopencv-dev libopencv-contrib-dev libopencv-imgproc-dev python-opencv python3-opencv"
 
 # install dependencies using rosdep
-rosdep init
 rosdep update
 rosdep install -y \
 	--ignore-src \
@@ -32,7 +30,7 @@ rosdep install -y \
 # build it all - for verbose, see https://answers.ros.org/question/363112/how-to-see-compiler-invocation-in-colcon-build
 colcon build \
 	--merge-install \
-	--cmake-args -DCMAKE_BUILD_TYPE=Release 
+	 --base-paths src/
     
 # remove build files
 rm -rf ${ROS_ROOT}/src

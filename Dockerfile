@@ -24,6 +24,7 @@ ENV LANG=en_US.UTF-8
 ENV PYTHONIOENCODING=utf-8
 
 # build ROS packages from source
+RUN export ROS_PACKAGE_PATH=${AMENT_PREFIX_PATH}
 COPY packages_build.sh packages_build.sh
 RUN ./packages_build.sh
 
